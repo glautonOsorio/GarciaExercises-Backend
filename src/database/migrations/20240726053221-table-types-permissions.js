@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("TypesPermissions", {
+    await queryInterface.createTable("typesPermissions", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = {
       typeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Users-Types",
+          model: "usersTypes",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -21,7 +21,7 @@ module.exports = {
       permissionId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Permissions",
+          model: "permissions",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -38,6 +38,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("TypesPermissions");
+    await queryInterface.dropTable("typesPermissions");
   },
 };
