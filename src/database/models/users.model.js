@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+const passwordEncryption = require("../../utils/passwordEncryption");
 
 class User extends Model {
   static associate(models) {
@@ -54,6 +55,13 @@ class User extends Model {
         sequelize,
         modelName: "User",
         tableName: "users",
+        hooks: {
+          beforeSave: async (user) => {
+            if (user.password) {
+              user.password = await passwordEncryption.encrypt(user.password);
+            }
+          },
+        },
       }
     );
   }

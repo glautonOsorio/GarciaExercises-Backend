@@ -20,6 +20,12 @@ module.exports = {
       return acc;
     }, {});
 
+    const passwordEncryption = require("../../utils/passwordEncryption");
+
+    const hashedPassword1 = await passwordEncryption.encrypt("password");
+    const hashedPassword2 = await passwordEncryption.encrypt("password");
+    const hashedPassword3 = await passwordEncryption.encrypt("password");
+
     await queryInterface.bulkInsert(
       "users",
       [
@@ -28,7 +34,7 @@ module.exports = {
           gender: "M",
           cpf: "123.456.789-00",
           email: "admin@example.com",
-          password: "password",
+          password: hashedPassword1,
           birthDate: new Date("1980-01-01"),
           userTypeId: userTypeIds["admin"],
           addressId: addressIds["12345-678"],
@@ -40,7 +46,7 @@ module.exports = {
           gender: "F",
           cpf: "987.654.321-00",
           email: "basic@example.com",
-          password: "password",
+          password: hashedPassword2,
           birthDate: new Date("1990-01-01"),
           userTypeId: userTypeIds["básico"],
           addressId: addressIds["98765-432"],
@@ -52,7 +58,7 @@ module.exports = {
           gender: "M",
           cpf: "555.666.777-88",
           email: "premium@example.com",
-          password: "password",
+          password: hashedPassword3,
           birthDate: new Date("1985-01-01"),
           userTypeId: userTypeIds["premium"],
           addressId: addressIds["12345-678"],
