@@ -3,7 +3,6 @@ const { findAllUsers } = require("./functions/user.index");
 const { deleteUser } = require("./functions/user.destroy");
 const { updateUser } = require("./functions/user.update");
 const { userLogin } = require("./functions/user.login");
-const { resetUserPassword } = require("./functions/user.resetPassword");
 const { findOneUser } = require("./functions/user.show");
 
 class UsersController {
@@ -17,23 +16,35 @@ class UsersController {
         } */
     await findAllUsers(req, res);
   }
+
   async store(req, res) {
     // #swagger.tags = ['Users']
     // #swagger.summary = 'Cadastra um novo usuário'
     // #swagger.description = 'Endpoint para cadastrar um novo usuário no banco de dados'
     /* #swagger.parameters["body"] = { 
         in: "body",
-        description:"
-        <u>
-          <li><b>fullName</b>: Nome do usuário com máximo e mínimo de 64 e 8 caracteres, respectivamente.<mark>Campo obrigatório</mark></li>
+        description:`
+        <ul>
+          <li><b>name</b>: Nome do usuário com máximo e mínimo de 64 e 8 caracteres, respectivamente. <mark>Campo obrigatório</mark></li>
           <li><b>gender</b>: Genero do usuário, com opções pré-definidas: male, female, other. <mark>Campo obrigatório</mark></li>
-          <li><b>email</b>: E-mail do usuário. <mark>Campo obrigatório</mark></span></li>
-          <li><b>cpf</b>: CPF do usuário no formato 000.000.000-00 <mark>Campo obrigatório</mark></li>
-          <li><b>phoneNumber</b>: Telefone do usuário, deve ser informado apenas os números e deve possui o DDD: 21988887777. <mark>Campo obrigatório</mark></li>
-          <li><b>type</b>: Role do usuário, podendo ser: medic, admin, nurse. <mark>Campo obrigatório</mark></li>
+          <li><b>cpf</b>: CPF do usuário no formato 000.000.000-00. <mark>Campo obrigatório</mark></li>
+          <li><b>email</b>: E-mail do usuário. <mark>Campo obrigatório</mark></li>
+          <li><b>birthDate</b>: Data de nascimento do usuário. <mark>Campo obrigatório</mark></li>
           <li><b>password</b>: A senha deve conter no mínimo 6 caracteres. <mark>Campo obrigatório</mark></li>
-          <li><b>systemStatus</b>: Status no sistema, sendo sendo um boolean com valor TRUE. OBS: caso não informado, será cadastrado como Ativo</li>
-        </u>",
+          <li><b>userType</b>: Tipo de usuário. <mark>Campo obrigatório</mark></li>
+          <li><b>address</b>: Objeto com os dados do endereço do usuário, contendo os campos:
+            <ul>
+              <li><b>zipCode</b>: CEP. <mark>Campo obrigatório</mark></li>
+              <li><b>city</b>: Cidade. <mark>Campo obrigatório</mark></li>
+              <li><b>state</b>: Estado. <mark>Campo obrigatório</mark></li>
+              <li><b>street</b>: Rua. <mark>Campo obrigatório</mark></li>
+              <li><b>number</b>: Número. <mark>Campo obrigatório</mark></li>
+              <li><b>complement</b>: Complemento.</li>
+              <li><b>neighborhood</b>: Bairro. <mark>Campo obrigatório</mark></li>
+              <li><b>referencePoint</b>: Ponto de referência.</li>
+            </ul>
+          </li>
+        </ul>`,
         type: "object",
         schema: { $ref: "#/definitions/userStoreBody" },
         required: true} */
@@ -56,11 +67,12 @@ class UsersController {
 
     await createNewUser(req, res);
   }
+
   async destroy(req, res) {
     // #swagger.tags = ['Users']
     // #swagger.summary = 'Deleta um usuário'
     // #swagger.description = 'Endpoint para deletar um usuário por meio de seu Id.'
-    // #swagger.parameters['id'] = {in: 'path', type: 'integer', description: 'User ID.'}
+    // #swagger.parameters['id'] = { in: 'path', type: 'integer', description: 'User ID.' }
     /* #swagger.responses[200] = { 
           description: 'Exemplo de resposta de sucesso',
           schema: { $ref: "#/definitions/userDestroy200" }
@@ -71,26 +83,40 @@ class UsersController {
         } */
     await deleteUser(req, res);
   }
+
   async update(req, res) {
     // #swagger.tags = ['Users']
     // #swagger.summary = 'Atualiza um usuário'
     // #swagger.description = 'Endpoint para atualizar um usuário por meio de seu Id.'
-    // #swagger.parameters['id'] = {in: 'path', type: 'integer', description: 'User ID.'}
+    // #swagger.parameters['id'] = { in: 'path', type: 'integer', description: 'User ID.' }
 
     /* #swagger.parameters["body"] = { 
         in: "body",
-        description:"
-        <u>
-          <li><b>fullName</b>: Nome do usuário com máximo e mínimo de 64 e 8 caracteres, respectivamente.<mark>Campo obrigatório</mark></li>
+        description:`
+        <ul>
+          <li><b>name</b>: Nome do usuário com máximo e mínimo de 64 e 8 caracteres, respectivamente. <mark>Campo obrigatório</mark></li>
           <li><b>gender</b>: Genero do usuário, com opções pré-definidas: male, female, other. <mark>Campo obrigatório</mark></li>
-          <li><b>phoneNumber</b>: Telefone do usuário, deve ser informado apenas os números e deve possui o DDD: 21988887777. <mark>Campo obrigatório</mark></li>
-          <li><b>type</b>: Role do usuário, podendo ser: medic, admin, nurse. <mark>Campo obrigatório</mark></li>
+          <li><b>cpf</b>: CPF do usuário no formato 000.000.000-00. <mark>Campo obrigatório</mark></li>
+          <li><b>email</b>: E-mail do usuário. <mark>Campo obrigatório</mark></li>
+          <li><b>birthDate</b>: Data de nascimento do usuário. <mark>Campo obrigatório</mark></li>
           <li><b>password</b>: A senha deve conter no mínimo 6 caracteres. <mark>Campo obrigatório</mark></li>
-        </u>",
+          <li><b>userType</b>: Tipo de usuário. <mark>Campo obrigatório</mark></li>
+          <li><b>address</b>: Objeto com os dados do endereço do usuário, contendo os campos:
+            <ul>
+              <li><b>zipCode</b>: CEP. <mark>Campo obrigatório</mark></li>
+              <li><b>city</b>: Cidade. <mark>Campo obrigatório</mark></li>
+              <li><b>state</b>: Estado. <mark>Campo obrigatório</mark></li>
+              <li><b>street</b>: Rua. <mark>Campo obrigatório</mark></li>
+              <li><b>number</b>: Número. <mark>Campo obrigatório</mark></li>
+              <li><b>complement</b>: Complemento.</li>
+              <li><b>neighborhood</b>: Bairro. <mark>Campo obrigatório</mark></li>
+              <li><b>referencePoint</b>: Ponto de referência.</li>
+            </ul>
+          </li>
+        </ul>`,
         type: "object",
         schema: { $ref: "#/definitions/userUpdateBody" },
         required: true} */
-
     /* #swagger.responses[200] = { 
           description: 'Exemplo de resposta de sucesso',
           schema: { $ref: "#/definitions/userUpdate200" }
@@ -105,11 +131,12 @@ class UsersController {
         } */
     await updateUser(req, res);
   }
+
   async show(req, res) {
     // #swagger.tags = ['Users']
-    // #swagger.summary = 'Exibe um usuario pelo ID'
-    // #swagger.description = 'Endpoint para exibir os dados de um usuario por meio de seu Id.'
-    // #swagger.parameters['id'] = {in: 'path', type: 'integer', description: 'User ID.'}
+    // #swagger.summary = 'Exibe um usuário pelo ID'
+    // #swagger.description = 'Endpoint para exibir os dados de um usuário por meio de seu Id.'
+    // #swagger.parameters['id'] = { in: 'path', type: 'integer', description: 'User ID.' }
     /* #swagger.responses[200] = { 
           description: 'Exemplo de resposta de sucesso',
           schema: { $ref: "#/definitions/usersShow200" }
@@ -120,17 +147,18 @@ class UsersController {
         } */
     await findOneUser(req, res);
   }
+
   async login(req, res) {
     // #swagger.tags = ['Users']
     // #swagger.summary = 'Loga um usuário'
     // #swagger.description = 'Endpoint para logar um usuário no sistema'
     /* #swagger.parameters["body"] = {
         in: "body",
-        description:"
-        <u>
+        description:`
+        <ul>
           <li><b>email</b>: E-mail do usuário. <mark>Campo obrigatório</mark></span></li>
           <li><b>password</b>: A senha deve conter no mínimo 6 caracteres. <mark>Campo obrigatório</mark></li>
-        </u>",
+        </ul>`,
         type: "object",
         schema: { $ref: "#/definitions/userLoginBody" },
         required: true} */

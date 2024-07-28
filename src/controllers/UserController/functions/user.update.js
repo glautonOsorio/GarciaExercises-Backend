@@ -2,6 +2,7 @@ const connection = require("../../../database");
 
 const User = require("../../../database/models/users.model");
 const Address = require("../../../database/models/address.model");
+const UserType = require("../../../database/models/usersTypes.model");
 
 module.exports.updateUser = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ module.exports.updateUser = async (req, res) => {
         email,
         birthDate,
         password,
+        userType,
         address: {
           zipCode,
           city,
@@ -30,7 +32,7 @@ module.exports.updateUser = async (req, res) => {
     const transaction = await connection.transaction();
     try {
       const user = await User.findByPk(id);
-      const { addressId } = user;
+      const { addressId, typeId } = user;
 
       await User.update(
         {
@@ -40,6 +42,7 @@ module.exports.updateUser = async (req, res) => {
           email,
           birthDate,
           password,
+          typeId,
         },
         { where: { id }, transaction }
       );
@@ -57,6 +60,18 @@ module.exports.updateUser = async (req, res) => {
         },
         { where: { id: addressId }, transaction }
       );
+
+      if (userType) {
+        const { id: newTypeId } = await UserType.findOne({
+          where: { type: userType },
+        });
+        if (newTypeId !== typeId) {
+          await User.update(
+            { typeId: newTypeId },
+            { where: { id }, transaction }
+          );
+        }
+      }
 
       await transaction.commit();
     } catch (error) {

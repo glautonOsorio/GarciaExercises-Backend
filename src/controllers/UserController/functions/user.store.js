@@ -2,6 +2,7 @@ const connection = require("../../../database");
 
 const User = require("../../../database/models/users.model");
 const Address = require("../../../database/models/address.model");
+const UserType = require("../../../database/models/usersTypes.model");
 
 module.exports.createNewUser = async (req, res) => {
   try {
@@ -13,6 +14,7 @@ module.exports.createNewUser = async (req, res) => {
         email,
         birthDate,
         password,
+        userType,
         address: {
           zipCode,
           city,
@@ -43,6 +45,10 @@ module.exports.createNewUser = async (req, res) => {
         { transaction }
       );
 
+      const { id: typeId } = await UserType.findOne({
+        where: { name: userType },
+      });
+
       const userObject = {
         name,
         gender,
@@ -50,6 +56,7 @@ module.exports.createNewUser = async (req, res) => {
         email,
         birthDate,
         password,
+        typeId,
         addressId,
       };
 
