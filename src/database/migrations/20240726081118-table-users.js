@@ -14,8 +14,8 @@ module.exports = {
         allowNull: false,
       },
       gender: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.ENUM("Homem", "Mulher", "Outro"),
       },
       cpf: {
         type: Sequelize.STRING,
