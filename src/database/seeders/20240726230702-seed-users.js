@@ -31,7 +31,7 @@ module.exports = {
       [
         {
           name: "Admin User",
-          gender: "M",
+          gender: "Homem",
           cpf: "123.456.789-00",
           email: "admin@example.com",
           password: hashedPassword1,
@@ -43,7 +43,7 @@ module.exports = {
         },
         {
           name: "Basic User",
-          gender: "F",
+          gender: "Mulher",
           cpf: "987.654.321-00",
           email: "basic@example.com",
           password: hashedPassword2,
@@ -55,7 +55,7 @@ module.exports = {
         },
         {
           name: "Premium User",
-          gender: "M",
+          gender: "Outro",
           cpf: "555.666.777-88",
           email: "premium@example.com",
           password: hashedPassword3,
