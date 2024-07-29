@@ -7,9 +7,15 @@ module.exports.findOneUser = async (req, res) => {
     const {
       params: { id },
     } = req;
-    if (id && isNaN(id)) {
-      const err = new Error("Id deve ser um INTEGER");
-      err.status = 400;
+
+    if (!Number.isInteger(Number.parseInt(id))) {
+      const err = new Error("O Id do usuário deve ser um número inteiro");
+      err.code = 400;
+      throw err;
+    }
+    if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
+      const err = new Error("Você não tem ver as informações desse usuário");
+      err.code = 400;
       throw err;
     }
 

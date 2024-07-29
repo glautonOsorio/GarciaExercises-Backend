@@ -11,6 +11,11 @@ module.exports.deleteUser = async (req, res) => {
       err.code = 400;
       throw err;
     }
+    if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
+      const err = new Error("Você não tem permissão de deletar esse usuário");
+      err.code = 400;
+      throw err;
+    }
 
     const user = await User.destroy({
       where: {
