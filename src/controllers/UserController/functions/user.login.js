@@ -37,11 +37,9 @@ module.exports.userLogin = async (req, res) => {
       throw err;
     }
 
-    const access_token = jwt.sign(
-      { email: user.email, type: user.userTypeId },
-      JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+    const access_token = jwt.sign({ email: user.email }, JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     return res.status(200).send({
       message: "Usuário logado com sucesso",
