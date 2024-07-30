@@ -17,10 +17,10 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      checkboxId: {
+      sportTypeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "checkbox",
+          model: "sport-types",
           key: "id",
         },
         onUpdate: "CASCADE",
