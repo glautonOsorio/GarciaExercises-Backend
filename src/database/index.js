@@ -6,8 +6,20 @@ const Permission = require("./models/permissions.model");
 const TypesPermission = require("./models/typesPermission.model");
 const UsersTypes = require("./models/usersTypes.model");
 const Address = require("./models/address.model");
+const Local = require("./models/local.model");
+const SportType = require("./models/sportType.model");
+const LocalSports = require("./models/localSports.model");
 
-const models = { User, Permission, TypesPermission, UsersTypes, Address };
+const models = {
+  User,
+  Permission,
+  TypesPermission,
+  UsersTypes,
+  Address,
+  Local,
+  SportType,
+  LocalSports,
+};
 
 const connection = new Sequelize(configDB);
 
