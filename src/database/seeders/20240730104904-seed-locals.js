@@ -13,7 +13,7 @@ module.exports = {
       );
 
       const userTypeMap = userTypes.reduce((acc, type) => {
-        acc[type.id] = type.name;
+        acc[type.id] = type.name.toLowerCase();
         return acc;
       }, {});
 
@@ -25,6 +25,14 @@ module.exports = {
         }
         return acc;
       }, {});
+
+      // Função para pegar o primeiro usuário disponível de um tipo específico
+      const getUserIdForType = (type) => {
+        if (userIds[type] && userIds[type].length > 0) {
+          return userIds[type].shift(); // Remove e retorna o primeiro usuário disponível
+        }
+        return null; // Retorna null se não houver usuários do tipo especificado
+      };
 
       const locals = [
         {
@@ -39,7 +47,7 @@ module.exports = {
           complement: "Apto 1",
           latitude: -23.55052,
           longitude: -46.633308,
-          userId: userIds.admin ? userIds.admin[0] : null,
+          userId: getUserIdForType("admin"),
           type: "premium",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -56,7 +64,7 @@ module.exports = {
           complement: "Apto 2",
           latitude: -23.55052,
           longitude: -46.633308,
-          userId: userIds.premium ? userIds.premium[0] : null,
+          userId: getUserIdForType("premium"),
           type: "premium",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -73,14 +81,16 @@ module.exports = {
           complement: "Apto 3",
           latitude: -23.55052,
           longitude: -46.633308,
-          userId: userIds.basico ? userIds.basico[0] : null,
+          userId: getUserIdForType("basico"),
           type: "basico",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
       ];
 
-      await queryInterface.bulkInsert("local", locals, {});
+      const validLocals = locals.filter((local) => local.userId !== null);
+
+      await queryInterface.bulkInsert("local", validLocals, {});
     } catch (error) {
       console.error("Error in seeder:", error);
       throw error;

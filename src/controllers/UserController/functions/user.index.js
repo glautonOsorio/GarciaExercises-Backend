@@ -30,7 +30,7 @@ module.exports.findAllUsers = async (req, res) => {
         ],
       });
     }
-    return res.status(200).send({ data: users });
+    return res.status(200).send(users);
   } catch (err) {
     console.log(err);
     return res.status(500).send({ err: err.message });
