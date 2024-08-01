@@ -25,7 +25,7 @@ module.exports.getMapLocal = async (cep) => {
 
     const mapLink = await getGoogleMapsLink(lat, lon);
 
-    return { lat, lon, display_name, mapLink };
+    return mapLink;
   } catch (error) {
     return { erro: "CEP não encontrado" };
   }

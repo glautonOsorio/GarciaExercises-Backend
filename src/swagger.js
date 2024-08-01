@@ -21,8 +21,13 @@ const doc = {
       name: "Users",
       description: "Requisições de usuários",
     },
+    {
+      name: "Local",
+      description: "Requisições de locais",
+    },
   ],
   definitions: {
+    // Definições para Users
     userLoginBody: {
       email: "email do usuário",
       password: "123456",
@@ -120,6 +125,99 @@ const doc = {
     userShow400: { message: "Id deve ser um INTEGER" },
     userShow404: { message: "Usuário não encontrado" },
     userShow500: { message: "Não foi possível completar a requisição." },
+
+    localCreateBody: {
+      name: "Local Exemplo",
+      description: "Descrição do local",
+      zipCode: "12345-678",
+      city: "Cidade",
+      state: "Estado",
+      street: "Rua",
+      number: "123",
+      complement: "Apto 456",
+      latitude: -23.5505,
+      longitude: -46.6333,
+      userId: 1,
+      type: "tipo do local",
+      sportTypes: [{ name: "Musculação" }, { name: "Yoga" }],
+    },
+    localCreate201: { message: "Local criado com sucesso" },
+    localCreate400: {
+      message: "Erro de validação dos campos",
+    },
+    localCreate409: {
+      message: "Dados duplicados, como tipo de esporte já cadastrado.",
+    },
+    localCreate500: {
+      message: "Não foi possível completar a criação do local.",
+    },
+
+    localUpdateBody: {
+      name: "Local Atualizado",
+      description: "Descrição atualizada",
+      zipCode: "12345-678",
+      city: "Cidade Atualizada",
+      state: "Estado Atualizado",
+      street: "Rua Atualizada",
+      number: "123",
+      complement: "Apto 456 Atualizado",
+      latitude: -23.5505,
+      longitude: -46.6333,
+      userId: 1,
+      type: "tipo atualizado",
+      sportTypes: [{ name: "Futebol" }],
+    },
+    localUpdate200: { message: "Local atualizado com sucesso" },
+    localUpdate400: {
+      message: "Erro de validação dos campos ou local não encontrado",
+    },
+    localUpdate403: { message: "Permissão negada para atualizar o local" },
+    localUpdate500: {
+      message: "Não foi possível completar a atualização do local.",
+    },
+
+    localDelete200: { message: "Local deletado com sucesso" },
+    localDelete400: {
+      message: "Erro de validação do ID ou local não encontrado",
+    },
+    localDelete403: { message: "Permissão negada para deletar o local" },
+    localDelete500: {
+      message: "Não foi possível completar a exclusão do local.",
+    },
+
+    localShow200: {
+      data: {
+        name: "Local Exemplo",
+        description: "Descrição do local",
+        zipCode: "12345-678",
+        city: "Cidade",
+        state: "Estado",
+        street: "Rua",
+        number: "123",
+        complement: "Apto 456",
+        latitude: -23.5505,
+        longitude: -46.6333,
+        userId: 1,
+        type: "tipo do local",
+        sportTypes: [{ name: "Musculação" }, { name: "Yoga" }],
+        createdAt: "2023-10-15T00:14:49.882Z",
+        updatedAt: "2023-10-15T00:14:49.882Z",
+      },
+    },
+    localShow400: { message: "Id deve ser um INTEGER" },
+    localShow404: { message: "Local não encontrado" },
+    localShow500: { message: "Não foi possível completar a requisição." },
+
+    localMapLink200: {
+      lat: -23.5505,
+      lon: -46.6333,
+      mapLink: "https://www.google.com/maps?q=-23.5505,-46.6333",
+    },
+    localMapLink404: { message: "CEP não encontrado ou erro ao gerar o link" },
+    localMapLink500: {
+      message:
+        "Não foi possível completar a requisição para o link do Google Maps.",
+    },
   },
 };
 
