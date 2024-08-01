@@ -14,8 +14,10 @@ module.exports.findOneUser = async (req, res) => {
       throw err;
     }
     if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
-      const err = new Error("Você não tem ver as informações desse usuário");
-      err.code = 400;
+      const err = new Error(
+        "Você não tem permissão para ver as informações desse usuário"
+      );
+      err.code = 403;
       throw err;
     }
 

@@ -38,7 +38,7 @@ module.exports.updateUser = async (req, res) => {
       const err = new Error(
         "Você não tem permissão de atualizar os dados desse usuário"
       );
-      err.code = 400;
+      err.code = 403;
       throw err;
     }
 

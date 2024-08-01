@@ -13,7 +13,7 @@ module.exports.deleteUser = async (req, res) => {
     }
     if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
       const err = new Error("Você não tem permissão de deletar esse usuário");
-      err.code = 400;
+      err.code = 403;
       throw err;
     }
 
