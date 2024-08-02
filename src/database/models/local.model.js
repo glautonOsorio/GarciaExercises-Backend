@@ -1,4 +1,3 @@
-// models/Local.model.js
 const { Model, DataTypes } = require("sequelize");
 
 class Local extends Model {
@@ -63,6 +62,14 @@ class Local extends Model {
         timestamps: true,
       }
     );
+  }
+
+  static associate(models) {
+    this.belongsTo(models.User, { as: "user", foreignKey: "userId" });
+    this.hasMany(models.LocalSports, {
+      as: "localSports",
+      foreignKey: "localId",
+    });
   }
 }
 

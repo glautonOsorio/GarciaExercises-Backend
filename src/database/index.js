@@ -15,10 +15,10 @@ const models = {
   Permission,
   TypesPermission,
   UsersTypes,
-  Address,
   Local,
-  SportType,
+  Address,
   LocalSports,
+  SportType,
 };
 
 const connection = new Sequelize(configDB);

@@ -1,4 +1,3 @@
-// models/Address.model.js
 const { Model, DataTypes } = require("sequelize");
 
 class Address extends Model {

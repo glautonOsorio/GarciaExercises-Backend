@@ -2,7 +2,7 @@ const Local = require("../../../database/models/local.model");
 const SportType = require("../../../database/models/sportType.model");
 const LocalSport = require("../../../database/models/localSports.model");
 
-const createNewLocal = async (req, res) => {
+module.exports.createNewLocal = async (req, res) => {
   try {
     const {
       name,
@@ -60,5 +60,3 @@ const createNewLocal = async (req, res) => {
       .send({ message: error.message });
   }
 };
-
-module.exports = createNewLocal;

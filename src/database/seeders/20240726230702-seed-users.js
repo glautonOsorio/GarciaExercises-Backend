@@ -49,7 +49,7 @@ module.exports = {
             email: "basic@example.com",
             password: hashedPassword2,
             birthDate: new Date("1990-01-01"),
-            userTypeId: userTypeIds["básico"],
+            userTypeId: userTypeIds["basico"],
             addressId: addressIds["98765-432"],
             createdAt: new Date(),
             updatedAt: new Date(),

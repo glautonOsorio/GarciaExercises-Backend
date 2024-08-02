@@ -2,17 +2,6 @@ const { Model, DataTypes } = require("sequelize");
 const passwordEncryption = require("../../utils/passwordEncryption");
 
 class User extends Model {
-  static associate(models) {
-    this.belongsTo(models.UsersTypes, {
-      foreignKey: "userTypeId",
-      as: "userType",
-    });
-    this.belongsTo(models.Address, {
-      foreignKey: "addressId",
-      as: "address",
-    });
-  }
-
   static init(sequelize) {
     super.init(
       {
@@ -64,6 +53,18 @@ class User extends Model {
         },
       }
     );
+  }
+
+  static associate(models) {
+    this.belongsTo(models.UsersTypes, {
+      foreignKey: "userTypeId",
+      as: "userType",
+    });
+    this.belongsTo(models.Address, {
+      foreignKey: "addressId",
+      as: "address",
+    });
+    this.hasMany(models.Local, { as: "locals", foreignKey: "userId" });
   }
 }
 

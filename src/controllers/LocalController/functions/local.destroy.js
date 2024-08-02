@@ -1,6 +1,6 @@
 const Local = require("../../../database/models/local.model");
 
-const deleteLocal = async (req, res) => {
+module.exports.deleteLocal = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -34,5 +34,3 @@ const deleteLocal = async (req, res) => {
       .json({ message: error.message || "Erro ao deletar local.", error });
   }
 };
-
-module.exports = deleteLocal;

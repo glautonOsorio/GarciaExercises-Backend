@@ -3,7 +3,7 @@ const User = require("../../../database/models/users.model");
 const LocalSport = require("../../../database/models/localSports.model");
 const SportType = require("../../../database/models/sportType.model");
 
-const findOneLocal = async (req, res) => {
+module.exports.findOneLocal = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -55,5 +55,3 @@ const findOneLocal = async (req, res) => {
       .json({ message: error.message || "Erro ao buscar local.", error });
   }
 };
-
-module.exports = findOneLocal;
