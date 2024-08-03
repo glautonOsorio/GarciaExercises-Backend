@@ -8,7 +8,7 @@ module.exports = {
       );
 
       const [sportTypes] = await queryInterface.sequelize.query(
-        `SELECT id, name FROM "sport-types";`
+        `SELECT id, name FROM "sportTypes";`
       );
 
       const localIds = locals.reduce((acc, local) => {
@@ -120,7 +120,7 @@ module.exports = {
         },
       ];
 
-      await queryInterface.bulkInsert("local-sports", localSports, {});
+      await queryInterface.bulkInsert("localSports", localSports, {});
     } catch (error) {
       console.error("Error in seeder:", error);
       throw error;
@@ -128,6 +128,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("local-sports", null, {});
+    await queryInterface.bulkDelete("localSports", null, {});
   },
 };

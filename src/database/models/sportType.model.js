@@ -1,4 +1,3 @@
-// models/SportType.model.js
 const { Model, DataTypes } = require("sequelize");
 
 class SportType extends Model {
@@ -13,10 +12,17 @@ class SportType extends Model {
       {
         sequelize,
         modelName: "SportType",
-        tableName: "sport-types",
+        tableName: "sportTypes",
         timestamps: true,
       }
     );
+  }
+
+  static associate(models) {
+    this.hasMany(models.LocalSports, {
+      as: "localSports",
+      foreignKey: "sportTypeId",
+    });
   }
 }
 

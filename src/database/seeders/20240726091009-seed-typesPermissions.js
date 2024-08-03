@@ -73,13 +73,13 @@ module.exports = {
         },
 
         {
-          typeId: userTypeIds.básico,
+          typeId: userTypeIds.basico,
           permissionId: permissionIds.read_record,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          typeId: userTypeIds.básico,
+          typeId: userTypeIds.basico,
           permissionId: permissionIds.read_test,
           createdAt: new Date(),
           updatedAt: new Date(),

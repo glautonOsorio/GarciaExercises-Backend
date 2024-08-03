@@ -1,14 +1,13 @@
-// models/LocalSport.model.js
 const { Model, DataTypes } = require("sequelize");
 
-class LocalSport extends Model {
+class LocalSports extends Model {
   static init(sequelize) {
     super.init(
       {
         localId: {
           type: DataTypes.INTEGER,
           references: {
-            model: "local",
+            model: "locals",
             key: "id",
           },
           onUpdate: "CASCADE",
@@ -17,7 +16,7 @@ class LocalSport extends Model {
         sportTypeId: {
           type: DataTypes.INTEGER,
           references: {
-            model: "sport-types",
+            model: "sportTypes",
             key: "id",
           },
           onUpdate: "CASCADE",
@@ -26,12 +25,20 @@ class LocalSport extends Model {
       },
       {
         sequelize,
-        modelName: "LocalSport",
-        tableName: "local-sports",
+        modelName: "LocalSports",
+        tableName: "localSports",
         timestamps: true,
       }
     );
   }
+
+  static associate(models) {
+    this.belongsTo(models.Local, { as: "local", foreignKey: "localId" });
+    this.belongsTo(models.SportType, {
+      as: "sportType",
+      foreignKey: "sportTypeId",
+    });
+  }
 }
 
-module.exports = LocalSport;
+module.exports = LocalSports;

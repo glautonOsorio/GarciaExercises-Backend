@@ -1,4 +1,3 @@
-// models/TypesPermission.model.js
 const { Model, DataTypes } = require("sequelize");
 
 class TypesPermission extends Model {

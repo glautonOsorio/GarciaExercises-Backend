@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("local-sports", {
+    await queryInterface.createTable("localSports", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,7 +20,7 @@ module.exports = {
       sportTypeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "sport-types",
+          model: "sportTypes",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("local-sports");
+    await queryInterface.dropTable("localSports");
   },
 };

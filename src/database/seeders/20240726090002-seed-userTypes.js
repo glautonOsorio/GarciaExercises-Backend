@@ -10,7 +10,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: "básico",
+        name: "basico",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -26,12 +26,11 @@ module.exports = {
         return acc;
       }, {});
 
-      // Função para pegar o primeiro usuário disponível de um tipo específico
       const getUserIdForType = (type) => {
         if (userIds[type] && userIds[type].length > 0) {
-          return userIds[type].shift(); // Remove e retorna o primeiro usuário disponível
+          return userIds[type].shift();
         }
-        return null; // Retorna null se não houver usuários do tipo especificado
+        return null;
       };
 
       const locals = [

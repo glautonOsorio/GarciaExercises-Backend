@@ -1,9 +1,9 @@
 const Local = require("../../../database/models/local.model");
 const User = require("../../../database/models/users.model");
-const LocalSport = require("../../../database/models/localSports.model");
+const LocalSports = require("../../../database/models/localSports.model");
 const SportType = require("../../../database/models/sportType.model");
 
-const findAllLocal = async (req, res) => {
+module.exports.findAllLocal = async (req, res) => {
   try {
     const { cep, type } = req.query;
 
@@ -26,25 +26,31 @@ const findAllLocal = async (req, res) => {
         {
           model: User,
           as: "user",
-          attributes: { exclude: ["password", "cpf", "id"] },
+          attributes: {
+            exclude: ["password", "cpf", "id", "createdAt", "updatedAt"],
+          },
         },
         {
-          model: LocalSport,
+          model: LocalSports,
           as: "localSports",
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+
           include: [
             {
               model: SportType,
               as: "sportType",
+              attributes: { exclude: ["createdAt", "updatedAt"] },
             },
           ],
         },
       ],
     });
-
-    res.status(200).json(local);
+    if (local) {
+      res.status(200).json(local);
+    } else {
+      res.status(404).json({ message: "Locais não encontrado." });
+    }
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar locais.", error });
   }
 };
-
-module.exports = findAllLocal;

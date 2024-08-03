@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("sport-types", [
+    await queryInterface.bulkInsert("sportTypes", [
       { name: "Musculação", createdAt: new Date(), updatedAt: new Date() },
       { name: "Basquete", createdAt: new Date(), updatedAt: new Date() },
       { name: "Corrida", createdAt: new Date(), updatedAt: new Date() },
@@ -16,6 +16,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("sport-types", null, {});
+    await queryInterface.bulkDelete("sportTypes", null, {});
   },
 };
