@@ -8,29 +8,22 @@ module.exports.findOneUser = async (req, res) => {
       params: { id },
     } = req;
 
-    if (!Number.isInteger(Number.parseInt(id))) {
-      const err = new Error("O Id do usuário deve ser um número inteiro");
-      err.code = 400;
-      throw err;
-    }
-    if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
-      const err = new Error(
-        "Você não tem permissão para ver as informações desse usuário"
-      );
-      err.code = 403;
-      throw err;
-    }
-
     const user = await User.findByPk(id, {
-      attributes: { exclude: ["password"] },
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
       include: [
         {
           model: Address,
           as: "address",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
         },
         {
           model: UserType,
           as: "userType",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
         },
       ],
     });

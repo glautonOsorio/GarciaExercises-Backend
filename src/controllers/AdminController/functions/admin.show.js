@@ -2,7 +2,7 @@ const User = require("../../../database/models/users.model");
 const Address = require("../../../database/models/address.model");
 const UserType = require("../../../database/models/usersTypes.model");
 
-module.exports.findOneUser = async (req, res) => {
+module.exports.findOneAdmin = async (req, res) => {
   try {
     const {
       params: { id },

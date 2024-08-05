@@ -29,19 +29,6 @@ module.exports.updateUser = async (req, res) => {
       },
     } = req;
 
-    if (!Number.isInteger(Number.parseInt(id))) {
-      const err = new Error("O Id do usuário deve ser um número inteiro");
-      err.code = 400;
-      throw err;
-    }
-    if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
-      const err = new Error(
-        "Você não tem permissão de atualizar os dados desse usuário"
-      );
-      err.code = 403;
-      throw err;
-    }
-
     const transaction = await connection.transaction();
     try {
       const user = await User.findByPk(id);

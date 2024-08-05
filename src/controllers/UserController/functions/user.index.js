@@ -4,35 +4,37 @@ const UserType = require("../../../database/models/usersTypes.model");
 
 module.exports.findAllUsers = async (req, res) => {
   try {
-    let users;
-    if (res.loggedUser.userType.name != "admin") {
-      users = await User.findAll({
-        attributes: { exclude: ["password", "cpf", "id"] },
-        include: [
-          {
-            model: UserType,
-            as: "userType",
+    const users = await User.findAll({
+      attributes: {
+        exclude: ["password", "cpf", "id", "createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: Address,
+          as: "address",
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
           },
-        ],
-      });
-    } else {
-      users = await User.findAll({
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Address,
-            as: "address",
+        },
+        {
+          model: UserType,
+          as: "userType",
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
           },
-          {
-            model: UserType,
-            as: "userType",
-          },
-        ],
-      });
+        },
+      ],
+    });
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: "Nenhum usuário encontrado" });
     }
-    return res.status(200).send(users);
+
+    return res.status(200).json(users);
   } catch (err) {
-    console.log(err);
-    return res.status(500).send({ err: err.message });
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "Erro ao buscar usuários", error: err.message });
   }
 };
