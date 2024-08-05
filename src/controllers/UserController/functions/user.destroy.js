@@ -6,17 +6,6 @@ module.exports.deleteUser = async (req, res) => {
       params: { id },
     } = req;
 
-    if (!Number.isInteger(Number.parseInt(id))) {
-      const err = new Error("O Id do usuário deve ser um número inteiro");
-      err.code = 400;
-      throw err;
-    }
-    if (id != res.loggedUser.id && res.loggedUser.userType.name != "admin") {
-      const err = new Error("Você não tem permissão de deletar esse usuário");
-      err.code = 403;
-      throw err;
-    }
-
     const user = await User.destroy({
       where: {
         id: id,

@@ -4,7 +4,7 @@ const User = require("../../../database/models/users.model");
 const Address = require("../../../database/models/address.model");
 const UserType = require("../../../database/models/usersTypes.model");
 
-module.exports.updateUser = async (req, res) => {
+module.exports.updateAdmin = async (req, res) => {
   try {
     const {
       params: { id },
@@ -15,7 +15,7 @@ module.exports.updateUser = async (req, res) => {
         email,
         birthDate,
         password,
-        userType,
+        userTypeId,
         address: {
           zipCode,
           city,
@@ -67,10 +67,8 @@ module.exports.updateUser = async (req, res) => {
         { where: { id: addressId }, transaction }
       );
 
-      if (userType) {
-        const { id: newTypeId } = await UserType.findOne({
-          where: { type: userType },
-        });
+      if (userTypeId) {
+        const { id: newTypeId } = await UserType.findByPk(userTypeId);
         if (newTypeId !== typeId) {
           await User.update(
             { typeId: newTypeId },

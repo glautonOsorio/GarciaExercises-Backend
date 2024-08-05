@@ -6,11 +6,26 @@ const {
 const { adminCheck } = require("../../middlewares/permissions/admin.check");
 const { adminYupSchema } = require("../../middlewares/yup/admin");
 const { yupValidate } = require("../../middlewares/yup/yup.middleware");
+const {
+  userTypeCheck,
+} = require("../../middlewares/permissions/userType.check");
 const adminRoutes = new Router();
 
 adminRoutes.get("/", authVerify, adminCheck, adminController.index);
-adminRoutes.get("/:id", authVerify, adminCheck, adminController.show);
-adminRoutes.delete("/:id", authVerify, adminCheck, adminController.destroy);
+adminRoutes.get(
+  "/:id",
+  authVerify,
+  userTypeCheck,
+  adminCheck,
+  adminController.show
+);
+adminRoutes.delete(
+  "/:id",
+  authVerify,
+  userTypeCheck,
+  adminCheck,
+  adminController.destroy
+);
 adminRoutes.post(
   "/",
   authVerify,
@@ -21,6 +36,7 @@ adminRoutes.post(
 adminRoutes.put(
   "/:id",
   authVerify,
+  userTypeCheck,
   adminCheck,
   yupValidate(adminYupSchema),
   adminController.update

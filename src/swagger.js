@@ -218,6 +218,221 @@ const doc = {
       message:
         "Não foi possível completar a requisição para o link do Google Maps.",
     },
+    adminIndex200: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          name: { type: "string", example: "Admin Example" },
+          email: { type: "string", example: "admin@example.com" },
+          cpf: { type: "string", example: "123.456.789-00" },
+          birthDate: { type: "string", format: "date", example: "1980-01-01" },
+          adminType: { type: "string", example: "admin" },
+        },
+      },
+    },
+    adminStoreBody: {
+      type: "object",
+      properties: {
+        name: { type: "string", example: "Osvaldo Tiago Ferreira" },
+        gender: {
+          type: "string",
+          enum: ["male", "female", "other"],
+          example: "male",
+        },
+        cpf: { type: "string", example: "135.735.415-00" },
+        email: {
+          type: "string",
+          example: "osvaldo.tiago.ferreira@supracolor.com.br",
+        },
+        birthDate: { type: "string", format: "date", example: "2000-01-01" },
+        password: { type: "string", example: "Tm9r6xUxBK" },
+        adminType: { type: "string", example: "admin" },
+        address: {
+          type: "object",
+          properties: {
+            zipCode: { type: "string", example: "12345-678" },
+            city: { type: "string", example: "Cidade" },
+            state: { type: "string", example: "Estado" },
+            street: { type: "string", example: "Rua" },
+            number: { type: "string", example: "123" },
+            complement: { type: "string", example: "Apto 456" },
+            neighborhood: { type: "string", example: "Bairro" },
+            referencePoint: { type: "string", example: "Ponto de referência" },
+          },
+        },
+      },
+    },
+    adminStore201: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Usuário registrado com sucesso" },
+      },
+    },
+    adminStore400: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          example: "Campo cpf deve estar no formato 000.000.000-00",
+        },
+      },
+    },
+    adminStore409: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "E-mail já cadastrado" },
+      },
+    },
+    adminStore500: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          example: "Não foi possível completar o registro.",
+        },
+      },
+    },
+    adminDestroy200: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Usuário deletado com sucesso" },
+      },
+    },
+    adminDestroy400: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Usuário não encontrado" },
+      },
+    },
+    adminUpdateBody: {
+      type: "object",
+      properties: {
+        name: { type: "string", example: "Osvaldo Tiago Ferreira" },
+        gender: {
+          type: "string",
+          enum: ["male", "female", "other"],
+          example: "male",
+        },
+        cpf: { type: "string", example: "135.735.415-00" },
+        email: {
+          type: "string",
+          example: "osvaldo.tiago.ferreira@supracolor.com.br",
+        },
+        birthDate: { type: "string", format: "date", example: "2000-01-01" },
+        password: { type: "string", example: "Tm9r6xUxBK" },
+        adminType: { type: "string", example: "admin" },
+        address: {
+          type: "object",
+          properties: {
+            zipCode: { type: "string", example: "12345-678" },
+            city: { type: "string", example: "Cidade" },
+            state: { type: "string", example: "Estado" },
+            street: { type: "string", example: "Rua" },
+            number: { type: "string", example: "123" },
+            complement: { type: "string", example: "Apto 456" },
+            neighborhood: { type: "string", example: "Bairro" },
+            referencePoint: { type: "string", example: "Ponto de referência" },
+          },
+        },
+      },
+    },
+    adminUpdate200: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          example: "Dados do usuário atualizados com sucesso",
+        },
+      },
+    },
+    adminUpdate400: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Usuário não encontrado" },
+      },
+    },
+    adminUpdate500: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          example: "Não foi possível completar a atualização.",
+        },
+      },
+    },
+    adminShow200: {
+      type: "object",
+      properties: {
+        data: {
+          type: "object",
+          properties: {
+            id: { type: "integer", example: 1 },
+            name: { type: "string", example: "Osvaldo Tiago Ferreira" },
+            gender: { type: "string", example: "male" },
+            cpf: { type: "string", example: "135.735.415-00" },
+            email: {
+              type: "string",
+              example: "osvaldo.tiago.ferreira@supracolor.com.br",
+            },
+            birthDate: {
+              type: "string",
+              format: "date",
+              example: "2000-01-01",
+            },
+            adminType: { type: "string", example: "admin" },
+            address: {
+              type: "object",
+              properties: {
+                zipCode: { type: "string", example: "12345-678" },
+                city: { type: "string", example: "Cidade" },
+                state: { type: "string", example: "Estado" },
+                street: { type: "string", example: "Rua" },
+                number: { type: "string", example: "123" },
+                complement: { type: "string", example: "Apto 456" },
+                neighborhood: { type: "string", example: "Bairro" },
+                referencePoint: {
+                  type: "string",
+                  example: "Ponto de referência",
+                },
+              },
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              example: "2023-10-15T00:14:49.882Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              example: "2023-10-15T00:14:49.882Z",
+            },
+          },
+        },
+      },
+    },
+    adminShow400: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Id deve ser um INTEGER" },
+      },
+    },
+    adminShow404: {
+      type: "object",
+      properties: {
+        message: { type: "string", example: "Usuário não encontrado" },
+      },
+    },
+    adminShow500: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          example: "Não foi possível completar a requisição.",
+        },
+      },
+    },
   },
 };
 

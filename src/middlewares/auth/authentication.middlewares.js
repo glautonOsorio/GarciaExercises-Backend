@@ -12,12 +12,12 @@ module.exports.authVerify = async (req, res, next) => {
     const tokenHeader = req.headers["authorization"];
     const token = tokenHeader && tokenHeader.split(" ")[1];
     if (!token) {
-      const err = new Error("não autorizado!");
+      const err = new Error("Não autorizado!");
       err.code = 401;
       throw err;
     }
     const decoded = jwt.verify(token, JWT_SECRET);
-    res.loggedUser = await User.findOne({
+    const loggedUser = await User.findOne({
       where: { email: decoded.email },
       attributes: { exclude: ["password"] },
       include: [
@@ -31,8 +31,14 @@ module.exports.authVerify = async (req, res, next) => {
         },
       ],
     });
+    if (!loggedUser) {
+      const err = new Error("Usuário não encontrado!");
+      err.code = 404;
+      throw err;
+    }
+    res.loggedUser = loggedUser;
     next();
   } catch (err) {
-    return res.status(400).send({ message: err.message });
+    return res.status(err.code || 400).json({ message: err.message });
   }
 };
