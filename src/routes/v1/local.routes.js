@@ -14,12 +14,7 @@ const localRoutes = new Router();
 localRoutes.get("/", authVerify, localController.index);
 localRoutes.get("/:id", authVerify, userTypeCheck, localController.show);
 localRoutes.delete("/:id", authVerify, userTypeCheck, localController.destroy);
-localRoutes.get(
-  "/:localId/maps",
-  authVerify,
-  userTypeCheck,
-  localController.showMapLink
-);
+localRoutes.get("/:localId/maps", authVerify, localController.showMapLink);
 localRoutes.post(
   "/",
   localCheck,

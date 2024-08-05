@@ -139,11 +139,11 @@ class UsersController {
     // #swagger.parameters['id'] = { in: 'path', type: 'integer', description: 'User ID.' }
     /* #swagger.responses[200] = { 
           description: 'Exemplo de resposta de sucesso',
-          schema: { $ref: "#/definitions/usersShow200" }
+          schema: { $ref: "#/definitions/userShow200" }
         } */
     /* #swagger.responses[400] = { 
           description: 'Exemplo de resposta de quando é passado um Id não inteiro.',
-          schema: { $ref: "#/definitions/usersShow400" }
+          schema: { $ref: "#/definitions/userShow400" }
         } */
     await findOneUser(req, res);
   }
